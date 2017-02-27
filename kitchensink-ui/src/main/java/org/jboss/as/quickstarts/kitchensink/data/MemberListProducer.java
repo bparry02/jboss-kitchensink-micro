@@ -23,6 +23,8 @@ import javax.enterprise.event.Reception;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Named;
+
+import java.util.Collections;
 import java.util.List;
 
 import org.jboss.as.quickstarts.kitchensink.model.Member;
@@ -30,8 +32,8 @@ import org.jboss.as.quickstarts.kitchensink.model.Member;
 @RequestScoped
 public class MemberListProducer {
 
-    @Inject
-    private MemberRepository memberRepository;
+//    @Inject
+//    private MemberRepository memberRepository;
 
     private List<Member> members;
 
@@ -49,6 +51,8 @@ public class MemberListProducer {
 
     @PostConstruct
     public void retrieveAllMembersOrderedByName() {
-        members = memberRepository.findAllOrderedByName();
+//        members = memberRepository.findAllOrderedByName();
+    	// TODO implement actual retrieval
+    	members = Collections.emptyList();
     }
 }
