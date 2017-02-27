@@ -23,7 +23,7 @@
     <version>6.4.0.GA.micro</version>
 </parent>
     <artifactId>jboss-kitchensink-model</artifactId>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <licenses>
         <license>
@@ -34,8 +34,23 @@
     </licenses>
 
 
-    <dependencies>
-
-    </dependencies>
+	<dependencies>
+		<dependency>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.0-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+	</dependencies>
 
 </project>
