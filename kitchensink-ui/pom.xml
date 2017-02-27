@@ -38,10 +38,13 @@
     <properties>
     </properties>
 
-
-
-    <dependencies>
-    </dependencies>
+	<dependencies>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>jboss-kitchensink-model</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
 
     <build>
         <!-- Maven will append the version to the finalName (which is the name 
