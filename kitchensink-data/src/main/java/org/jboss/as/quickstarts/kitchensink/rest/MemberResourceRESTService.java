@@ -42,7 +42,7 @@ import javax.ws.rs.core.Response;
 
 import org.jboss.as.quickstarts.kitchensink.data.MemberRepository;
 import org.jboss.as.quickstarts.kitchensink.model.Member;
-import org.jboss.as.quickstarts.kitchensink.service.MemberRegistration;
+import org.jboss.as.quickstarts.kitchensink.service.MemberDao;
 
 /**
  * JAX-RS Example
@@ -63,7 +63,7 @@ public class MemberResourceRESTService {
     private MemberRepository repository;
 
     @Inject
-    MemberRegistration registration;
+    MemberDao memberDao;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -97,7 +97,7 @@ public class MemberResourceRESTService {
             // Validates member using bean validation
             validateMember(member);
 
-            registration.register(member);
+            memberDao.register(member);
 
             // Create an "ok" response
             builder = Response.ok();

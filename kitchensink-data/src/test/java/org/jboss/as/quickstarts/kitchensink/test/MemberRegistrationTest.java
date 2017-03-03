@@ -26,7 +26,7 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.as.quickstarts.kitchensink.model.Member;
 import org.jboss.as.quickstarts.kitchensink.service.DBMemberRegistration;
-import org.jboss.as.quickstarts.kitchensink.service.MemberRegistration;
+import org.jboss.as.quickstarts.kitchensink.service.MemberDao;
 import org.jboss.as.quickstarts.kitchensink.util.Resources;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -48,7 +48,7 @@ public class MemberRegistrationTest {
     }
 
     @Inject
-    MemberRegistration memberRegistration;
+    MemberDao memberDao;
 
     @Inject
     Logger log;
@@ -59,7 +59,7 @@ public class MemberRegistrationTest {
         newMember.setName("Jane Doe");
         newMember.setEmail("jane@mailinator.com");
         newMember.setPhoneNumber("2125551234");
-        memberRegistration.register(newMember);
+        memberDao.register(newMember);
         assertNotNull(newMember.getId());
         log.info(newMember.getName() + " was persisted with id " + newMember.getId());
     }

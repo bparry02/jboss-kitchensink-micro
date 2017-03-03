@@ -4,7 +4,7 @@ import java.util.logging.Logger;
 
 import org.jboss.as.quickstarts.kitchensink.model.Member;
 
-public class MockMemberRegistration implements MemberRegistration {
+public class MockMemberRegistration implements MemberDao {
 
 	private static final Logger LOG = Logger.getLogger(MockMemberRegistration.class.getName()); 
 	
