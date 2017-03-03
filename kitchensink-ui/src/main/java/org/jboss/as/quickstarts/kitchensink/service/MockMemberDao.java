@@ -4,8 +4,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 
+import javax.enterprise.inject.Alternative;
+
 import org.jboss.as.quickstarts.kitchensink.model.Member;
 
+@Alternative
 public class MockMemberDao implements MemberDao {
 
 	private static final Logger LOG = Logger.getLogger(MockMemberDao.class.getName()); 
