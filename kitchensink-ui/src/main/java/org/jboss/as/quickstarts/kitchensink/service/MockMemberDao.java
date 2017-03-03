@@ -4,9 +4,9 @@ import java.util.logging.Logger;
 
 import org.jboss.as.quickstarts.kitchensink.model.Member;
 
-public class MockMemberRegistration implements MemberDao {
+public class MockMemberDao implements MemberDao {
 
-	private static final Logger LOG = Logger.getLogger(MockMemberRegistration.class.getName()); 
+	private static final Logger LOG = Logger.getLogger(MockMemberDao.class.getName()); 
 	
 	@Override
 	public void register(Member member) throws Exception {
