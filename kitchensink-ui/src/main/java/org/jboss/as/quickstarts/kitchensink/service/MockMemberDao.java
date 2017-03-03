@@ -1,5 +1,6 @@
 package org.jboss.as.quickstarts.kitchensink.service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -26,7 +27,8 @@ public class MockMemberDao implements MemberDao {
 
 	@Override
 	public List<Member> findAllOrderedByName() {
-		throw new UnsupportedOperationException("Not yet implemented");
+		LOG.info("Returning empty list of Members");
+		return Collections.emptyList();
 	}
 
 }

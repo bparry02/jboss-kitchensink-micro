@@ -16,6 +16,8 @@
  */
 package org.jboss.as.quickstarts.kitchensink.data;
 
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.event.Observes;
@@ -24,16 +26,14 @@ import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import java.util.Collections;
-import java.util.List;
-
 import org.jboss.as.quickstarts.kitchensink.model.Member;
+import org.jboss.as.quickstarts.kitchensink.service.MemberDao;
 
 @RequestScoped
 public class MemberListProducer {
 
-//    @Inject
-//    private MemberRepository memberRepository;
+    @Inject
+    private MemberDao memberDao;
 
     private List<Member> members;
 
@@ -51,8 +51,6 @@ public class MemberListProducer {
 
     @PostConstruct
     public void retrieveAllMembersOrderedByName() {
-//        members = memberRepository.findAllOrderedByName();
-    	// TODO implement actual retrieval
-    	members = Collections.emptyList();
+        members = memberDao.findAllOrderedByName();
     }
 }
