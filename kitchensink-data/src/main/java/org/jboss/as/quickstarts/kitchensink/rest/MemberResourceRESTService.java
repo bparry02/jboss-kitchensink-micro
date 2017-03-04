@@ -23,6 +23,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Logger;
 
+import javax.ejb.EJBException;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
@@ -175,6 +176,13 @@ public class MemberResourceRESTService {
             member = memberDao.findByEmail(email);
         } catch (NoResultException e) {
             // ignore
+        } catch (EJBException e) {
+        	if (e.getCause() instanceof NoResultException) {
+        		// ignore
+        	} else {
+        		// not sure what the exception is from, better throw it!
+        		throw e;
+        	}
         }
         return member != null;
     }

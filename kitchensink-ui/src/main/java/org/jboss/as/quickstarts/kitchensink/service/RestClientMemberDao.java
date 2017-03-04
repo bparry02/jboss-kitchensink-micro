@@ -5,10 +5,13 @@ import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.jboss.as.quickstarts.kitchensink.model.Member;
 import org.jboss.resteasy.client.ProxyFactory;
@@ -47,7 +50,13 @@ public class RestClientMemberDao implements MemberDao {
 
 	@Override
 	public void register(Member member) throws Exception {
-		throw new UnsupportedOperationException("Not yet implemented");
+		KitchensinkServiceClient client = ProxyFactory.create(KitchensinkServiceClient.class, kitchenSinkServiceUrl);
+		Response response = client.createMember(member);
+
+		if (response != null && response.getStatus() != 200) {
+			LOG.severe("Problem communicating wtih KitchensinkService, response code: " + response.getStatus());
+			throw new RuntimeException("Problem communicating with KitchensinkService");
+		}
 	}
 
 	@Override
@@ -73,5 +82,11 @@ public class RestClientMemberDao implements MemberDao {
 		@Path("/members")
 		@Produces(MediaType.APPLICATION_JSON)
 		List<Member> getAllMembers();
+
+		@POST
+		@Path("/members")
+		@Produces(MediaType.APPLICATION_JSON)
+		@Consumes(MediaType.APPLICATION_JSON)
+		Response createMember(Member member);
 	}
 }
