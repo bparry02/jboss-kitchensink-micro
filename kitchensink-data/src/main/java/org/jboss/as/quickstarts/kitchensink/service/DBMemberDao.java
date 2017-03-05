@@ -22,6 +22,7 @@ import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -58,7 +59,15 @@ public class DBMemberDao implements MemberDao {
         // feature in JPA 2.0
         // criteria.select(member).where(cb.equal(member.get(Member_.email), email));
         criteria.select(member).where(cb.equal(member.get("email"), email));
-        return em.createQuery(criteria).getSingleResult();
+        
+		Member result = null;
+		try {
+			result = em.createQuery(criteria).getSingleResult();
+		} catch (NoResultException e) {
+			// do nothing, return null to indicate no result
+		}
+
+		return result;
     }
 
     @Override
