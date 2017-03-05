@@ -16,18 +16,17 @@
  */
 package org.jboss.as.quickstarts.kitchensink.service;
 
-import org.jboss.as.quickstarts.kitchensink.model.Member;
+import java.util.List;
+import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
-import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import java.util.List;
-import java.util.logging.Logger;
+import org.jboss.as.quickstarts.kitchensink.model.Member;
 
 // The @Stateless annotation eliminates the need for manual transaction demarcation
 @Stateless
@@ -39,14 +38,10 @@ public class DBMemberDao implements MemberDao {
     @Inject
     private EntityManager em;
 
-    @Inject
-    private Event<Member> memberEventSrc;
-
     @Override
 	public void register(Member member) throws Exception {
         log.info("Registering " + member.getName());
         em.persist(member);
-        memberEventSrc.fire(member);
     }
     
     @Override

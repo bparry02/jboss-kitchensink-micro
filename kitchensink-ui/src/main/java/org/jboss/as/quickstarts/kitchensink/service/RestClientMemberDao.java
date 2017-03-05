@@ -5,6 +5,8 @@ import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.event.Event;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -22,6 +24,9 @@ import org.jboss.resteasy.spi.ResteasyProviderFactory;
 public class RestClientMemberDao implements MemberDao {
 
 	private static final Logger LOG = Logger.getLogger(RestClientMemberDao.class.getName());
+
+	@Inject
+	private Event<Member> memberEventSrc;
 
 	private String kitchenSinkServiceUrl;
 
@@ -57,6 +62,9 @@ public class RestClientMemberDao implements MemberDao {
 			LOG.severe("Problem communicating wtih KitchensinkService, response code: " + response.getStatus());
 			throw new RuntimeException("Problem communicating with KitchensinkService");
 		}
+
+		// notify ui elements so member list is refreshed
+		memberEventSrc.fire(member);
 	}
 
 	@Override
