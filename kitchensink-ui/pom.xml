@@ -165,7 +165,6 @@
                         <artifactId>maven-war-plugin</artifactId>
                         <version>${version.war.plugin}</version>
                         <configuration>
-                            <outputDirectory>deployments</outputDirectory>
                             <warName>ROOT</warName>
                         </configuration>
                     </plugin>
