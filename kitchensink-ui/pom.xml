@@ -21,7 +21,7 @@
 <parent>
     <groupId>org.jboss.quickstarts.eap</groupId>
     <artifactId>jboss-kitchensink</artifactId>
-    <version>6.4.0.GA.micro</version>
+    <version>6.4.0.GA.micro-SNAPSHOT</version>
 </parent>
     <artifactId>jboss-kitchensink-ui</artifactId>
     <packaging>war</packaging>
