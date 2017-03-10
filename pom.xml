@@ -66,6 +66,16 @@
         <version.org.apache.httpcomponents>4.3.3.redhat-1</version.org.apache.httpcomponents>
     </properties>
 
+	<distributionManagement>
+		<repository>
+			<id>nexus</id>
+			<url>http://nexus.cicd.svc.cluster.local:8081/content/repositories/releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>nexus</id>
+			<url>http://nexus.cicd.svc.cluster.local:8081/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
 
     <dependencyManagement>
         <dependencies>
@@ -131,6 +141,26 @@
                 <artifactId>jboss-as-maven-plugin</artifactId>
                 <version>${version.jboss.maven.plugin}</version>
             </plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.7.6.201602180812</version>
+				<executions>
+					<execution>
+						<id>default-prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>default-report</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
         </plugins>
     </build>
 
